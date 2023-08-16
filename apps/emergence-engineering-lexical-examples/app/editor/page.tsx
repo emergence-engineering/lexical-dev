@@ -8,45 +8,78 @@ import {
   LinkPreviewNode,
   LinkPreviewPlugin,
 } from "lexical-link-preview-plugin";
+import { SlashMenuPlugin } from "lexical-slash-menu-plugin";
+import "lexical-slash-menu-plugin/dist/styles/style.css";
+import "lexical-link-preview-plugin/dist/styles/style.css";
 
-function onError(error) {
-  console.error("this.error", { error });
+import { exampleTheme } from "./exampleTheme";
+
+function onError(error: any) {
+  console.error("lexical.onError", { error });
 }
 
 function Editor() {
   const initialConfig = {
     namespace: "MyEditor",
-    theme: {
-      linkPreviewContainer: "linkPreviewContainer",
-    },
+    theme: { ...exampleTheme, linkPreviewContainer: "linkPreviewContainer" },
     onError,
     nodes: [LinkPreviewNode],
   };
 
   return (
-    <LexicalComposer initialConfig={initialConfig}>
-      <LinkPreviewPlugin
-        showLink={false}
-        fetchingFunction={(link: string) => {
-          return fetch("api/preview", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+    <div style={{ padding: "1rem" }}>
+      <LexicalComposer initialConfig={initialConfig}>
+        <LinkPreviewPlugin
+          showLink={false}
+          fetchDataForPreview={(link: string) => {
+            return fetch("api/preview", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ link }),
+            })
+              .then((res) => res.json())
+              .then((res) => {
+                return res.data;
+              });
+          }}
+        />
+        <SlashMenuPlugin
+          menuElements={[
+            {
+              id: "1",
+              label: "First",
+              type: "command",
             },
-            body: JSON.stringify({ link }),
-          })
-            .then((res) => res.json())
-            .then((res) => {
-              return res.data;
-            });
-        }}
-      />
-      <RichTextPlugin
-        placeholder={<div>Enter some text...</div>}
-        contentEditable={<ContentEditable />}
-        ErrorBoundary={LexicalErrorBoundary}
-      />
-    </LexicalComposer>
+            {
+              id: "2",
+              label: "Second",
+              type: "command",
+            },
+            {
+              id: "3",
+              label: "Third",
+              type: "command",
+            },
+          ]}
+        />
+        <RichTextPlugin
+          placeholder={null}
+          contentEditable={
+            <ContentEditable
+              style={{
+                padding: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                minHeight: "500px",
+              }}
+            />
+          }
+          ErrorBoundary={LexicalErrorBoundary}
+        />
+      </LexicalComposer>
+    </div>
   );
 }
 
