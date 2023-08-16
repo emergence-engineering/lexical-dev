@@ -1,0 +1,3 @@
+[submodule "packages/lexical-link-preview-plugin"]
+	path = packages/lexical-link-preview-plugin
+	url = https://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@github.com/emergence-engineering/lexical-link-preview-plugin.git
