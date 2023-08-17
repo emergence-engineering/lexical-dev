@@ -40,7 +40,7 @@ a {
   width: 16px;
   height: 16px;
   opacity: 0.3;
-  background-image: url("draggable-block-icon.svg");
+  background-image: url("/draggable-block-icon.svg");
   justify-self: center;
   align-self: center;
 }
