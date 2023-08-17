@@ -13,6 +13,7 @@ import "lexical-slash-menu-plugin/dist/styles/style.css";
 import "lexical-link-preview-plugin/dist/styles/style.css";
 
 import { exampleTheme } from "./exampleTheme";
+import { useState } from "react";
 
 function onError(error: any) {
   console.error("lexical.onError", { error });
@@ -26,9 +27,21 @@ function Editor() {
     nodes: [LinkPreviewNode],
   };
 
+  const [floatingAnchorElem, setFloatingAnchorElem] =
+    useState<HTMLDivElement | null>(null);
+
+  const onRef = (_floatingAnchorElem: HTMLDivElement) => {
+    if (_floatingAnchorElem !== null) {
+      setFloatingAnchorElem(_floatingAnchorElem);
+    }
+  };
+
   return (
     <div style={{ padding: "1rem" }}>
       <LexicalComposer initialConfig={initialConfig}>
+        {/*{floatingAnchorElem && (*/}
+        {/*    <DraggableBlockPlugin anchorElem={floatingAnchorElem} />*/}
+        {/*)}*/}
         <LinkPreviewPlugin
           showLink={false}
           fetchDataForPreview={(link: string) => {
@@ -67,14 +80,18 @@ function Editor() {
         <RichTextPlugin
           placeholder={null}
           contentEditable={
-            <ContentEditable
-              style={{
-                padding: "10px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                minHeight: "500px",
-              }}
-            />
+            <div className="editor-scroller">
+              <div ref={onRef} className={"editor"}>
+                <ContentEditable
+                  style={{
+                    padding: "10px",
+                    border: "1px solid #ccc",
+                    borderRadius: "5px",
+                    minHeight: "500px",
+                  }}
+                />
+              </div>
+            </div>
           }
           ErrorBoundary={LexicalErrorBoundary}
         />
