@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "editor": "rm -rf .next && pnpm --filter emergence-engineering-lexical-examples dev",
+    "build:preview": "rm -rf dist && pnpm --filter lexical-link-preview-plugin build",
+    "dev:preview": "pnpm --filter lexical-link-preview-plugin dev",
+    "build:slash": "rm -rf dist && pnpm --filter lexical-slash-menu-plugin build",
+    "dev:slash": "pnpm --filter lexical-slash-menu-plugin dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
