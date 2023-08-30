@@ -1,5 +1,12 @@
 # emergence-engineering-lexical-examples
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies
+  - @emergence-engineering/lexical-slash-menu-plugin@0.0.3
+
 ## 0.1.2
 
 ### Patch Changes

@@ -27,6 +27,7 @@ const insertText = (text: string) => {
 const SlashMenu: FunctionComponent = () => {
   return (
     <SlashMenuPlugin
+      clickable
       menuElements={[
         {
           id: "1",
