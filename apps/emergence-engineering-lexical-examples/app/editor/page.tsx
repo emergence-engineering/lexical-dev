@@ -1,20 +1,39 @@
 "use client";
 
+import "@emergence-engineering/lexical-slash-menu-plugin/dist/styles/style.css";
+import "@emergence-engineering/lexical-link-preview-plugin/dist/styles/style.css";
+
+import { withLexical } from "./withLexical";
 import {
   LinkPreviewNode,
   LinkPreviewPlugin,
-} from "lexical-link-preview-plugin";
-import { SlashMenuPlugin } from "lexical-slash-menu-plugin";
-import "lexical-slash-menu-plugin/dist/styles/style.css";
-import "lexical-link-preview-plugin/dist/styles/style.css";
+} from "@emergence-engineering/lexical-link-preview-plugin";
+import { SlashMenuPlugin } from "@emergence-engineering/lexical-slash-menu-plugin";
+import {
+  $createTextNode,
+  $getSelection,
+  $isParagraphNode,
+  LexicalEditor,
+} from "lexical";
+import React from "react";
 
-import { withLexical } from "./withLexical";
-
+const insertText = (text: string) => {
+  const selection = $getSelection();
+  const nodes = selection?.getNodes();
+  const paragraphNode = $isParagraphNode(nodes?.[0])
+    ? nodes?.[0]
+    : nodes?.[0]?.getParent();
+  const textNode = $createTextNode(text);
+  if (paragraphNode) {
+    paragraphNode.append(textNode);
+  }
+};
 const Editor = () => {
   return (
     <>
       <LinkPreviewPlugin
         showLink={false}
+        showClosePreview={true}
         fetchDataForPreview={(link: string) => {
           return fetch("/api/preview", {
             method: "POST",
@@ -35,16 +54,48 @@ const Editor = () => {
             id: "1",
             label: "First",
             type: "command",
+            command: (editor: LexicalEditor) => {
+              editor.update(() => {
+                insertText("First");
+              });
+            },
           },
           {
             id: "2",
             label: "Second",
             type: "command",
+            command: (editor: LexicalEditor) => {
+              editor.update(() => {
+                insertText("Second");
+              });
+            },
           },
           {
             id: "3",
-            label: "Third",
-            type: "command",
+            label: "Submenu",
+            type: "submenu",
+            elements: [
+              {
+                id: "4",
+                label: "Third",
+                type: "command",
+                command: (editor: LexicalEditor) => {
+                  editor.update(() => {
+                    insertText("Third");
+                  });
+                },
+              },
+              {
+                id: "5",
+                label: "Fourth",
+                type: "command",
+                command: (editor: LexicalEditor) => {
+                  editor.update(() => {
+                    insertText("Fourth");
+                  });
+                },
+              },
+            ],
           },
         ]}
       />

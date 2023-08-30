@@ -1,18 +1,20 @@
 "use client";
 
 import React, { FunctionComponent } from "react";
-import {
-  LinkPreviewNode,
-  LinkPreviewPlugin,
-} from "lexical-link-preview-plugin";
-import "lexical-link-preview-plugin/dist/styles/style.css";
+
+import "@emergence-engineering/lexical-link-preview-plugin/dist/styles/style.css";
 
 import { withLexical } from "../withLexical";
+import {
+  LinkPreviewPlugin,
+  LinkPreviewNode,
+} from "@emergence-engineering/lexical-link-preview-plugin";
 
 const LinkPreviewPage: FunctionComponent = () => {
   return (
     <LinkPreviewPlugin
       showLink={false}
+      showClosePreview={true}
       fetchDataForPreview={(link: string) => {
         return fetch("/api/preview", {
           method: "POST",

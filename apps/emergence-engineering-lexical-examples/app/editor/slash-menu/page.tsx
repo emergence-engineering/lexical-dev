@@ -1,8 +1,8 @@
 "use client";
 
 import React, { FunctionComponent } from "react";
-import { SlashMenuPlugin } from "lexical-slash-menu-plugin";
-import "lexical-slash-menu-plugin/dist/styles/style.css";
+import { SlashMenuPlugin } from "@emergence-engineering/lexical-slash-menu-plugin";
+import "@emergence-engineering/lexical-slash-menu-plugin/dist/styles/style.css";
 
 import { withLexical } from "../withLexical";
 import {
