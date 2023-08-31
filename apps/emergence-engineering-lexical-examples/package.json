@@ -24,6 +24,7 @@
     "lexical": "^0.11.3",
     "@emergence-engineering/lexical-link-preview-plugin": "workspace:^",
     "@emergence-engineering/lexical-slash-menu-plugin": "workspace:^",
+    "@emergence-engineering/lexical-suggestcat-plugin": "workspace:^",
     "link-preview-js": "^3.0.4",
     "next": "13.4.16",
     "react": "18.2.0",

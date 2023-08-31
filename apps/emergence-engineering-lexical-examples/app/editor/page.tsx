@@ -16,6 +16,7 @@ import {
   LexicalEditor,
 } from "lexical";
 import React from "react";
+import { init } from "@emergence-engineering/lexical-suggestcat-plugin";
 
 const insertText = (text: string) => {
   const selection = $getSelection();
@@ -29,6 +30,7 @@ const insertText = (text: string) => {
   }
 };
 const Editor = () => {
+  init();
   return (
     <>
       <LinkPreviewPlugin

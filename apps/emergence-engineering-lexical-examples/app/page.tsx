@@ -27,6 +27,9 @@ export default function Home() {
       <div className="link" onClick={() => navigate("/editor/slash-menu")}>
         Slash Menu
       </div>
+      <div className="link" onClick={() => navigate("/editor/suggestcat")}>
+        Suggestcat
+      </div>
     </div>
   );
 }
