@@ -4,3 +4,6 @@
 [submodule "packages/lexical-slash-menu-plugin"]
 	path = packages/lexical-slash-menu-plugin
 	url = https://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@github.com/emergence-engineering/lexical-slash-menu-plugin.git
+[submodule "packages/lexical-suggestcat-plugin"]
+	path = packages/lexical-suggestcat-plugin
+	url = https://github.com/emergence-engineering/lexical-suggestcat-plugin.git
